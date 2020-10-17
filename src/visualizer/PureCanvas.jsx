@@ -11,7 +11,8 @@ export default class PureCanvas extends React.Component {
     }
     
     this.clickHandler = event => {
-      this.props.onClick(event, this.nodeRef);
+      if (props.onClick)
+        props.onClick(event, this.nodeRef);
     }
   }
 

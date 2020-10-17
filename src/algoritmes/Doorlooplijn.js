@@ -7,7 +7,7 @@
  *    -> indicate completion?
  */
 
-import { useEffect, useState } from "react"
+import { useState, useRef } from "react"
 import { RedBlackBST } from "./BinaryTree"
 
 function distance(point1, point2) {
@@ -16,7 +16,7 @@ function distance(point1, point2) {
 }
 
 export default function useDoorloop() {
-  const status = new RedBlackBST();
+  const status = useRef(new RedBlackBST());
 
   const [points, setPoints] = useState([]);
   const [closestPair, setClosestPair] = useState({
@@ -28,10 +28,9 @@ export default function useDoorloop() {
     const newIndex = currentIndex + 1;
     setCurrentIndex(newIndex);
     const point = points[newIndex];
-    status.insert(point.y, point);
+    status.current.insert(point.y, point);
 
-
-    const res = status.nearest(point.y)
+    const res = status.current.nnearest(point.y)
     console.log(res)
     const result = res
                       .filter( (elem) => elem !==null && distance(point, elem) < closestPair.distance )
@@ -44,9 +43,14 @@ export default function useDoorloop() {
     
   }
 
-  // useEffect(() => {
-  //   console.log("currentIndex was changedd");
-  // }, [currentIndex]);
+  const reset = () => {
+    status.current.free();
+    setCurrentIndex(-1);
+    setClosestPair({
+      first: null, second: null, distance: -1
+    });
+    setPoints([]);
+  }
 
-  return [status, closestPair, step, currentIndex, setPoints];
+  return [status, closestPair, step, currentIndex, setPoints, reset, points];
 }

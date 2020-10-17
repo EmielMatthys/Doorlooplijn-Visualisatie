@@ -38,7 +38,7 @@ class Visualizer extends React.Component {
       );
     })
 
-    if (current >= 0) {
+    if (current >= 0 && current < points.length) {
       const currentPoint = points[current];
       this.ctx.beginPath();
       this.ctx.moveTo(currentPoint.x + POINT_WIDTH / 2, 0);
