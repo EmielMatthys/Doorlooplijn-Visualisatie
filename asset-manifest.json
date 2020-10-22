@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/doorlooplijn-visualisatie-depl/static/css/main.2f1dcbc1.chunk.css",
+    "main.js": "/doorlooplijn-visualisatie-depl/static/js/main.1d415869.chunk.js",
+    "main.js.map": "/doorlooplijn-visualisatie-depl/static/js/main.1d415869.chunk.js.map",
+    "runtime-main.js": "/doorlooplijn-visualisatie-depl/static/js/runtime-main.96c6bc4b.js",
+    "runtime-main.js.map": "/doorlooplijn-visualisatie-depl/static/js/runtime-main.96c6bc4b.js.map",
+    "static/js/2.ad7a1347.chunk.js": "/doorlooplijn-visualisatie-depl/static/js/2.ad7a1347.chunk.js",
+    "static/js/2.ad7a1347.chunk.js.map": "/doorlooplijn-visualisatie-depl/static/js/2.ad7a1347.chunk.js.map",
+    "index.html": "/doorlooplijn-visualisatie-depl/index.html",
+    "precache-manifest.876f1e4d178678f2146e5f6367320339.js": "/doorlooplijn-visualisatie-depl/precache-manifest.876f1e4d178678f2146e5f6367320339.js",
+    "service-worker.js": "/doorlooplijn-visualisatie-depl/service-worker.js",
+    "static/css/main.2f1dcbc1.chunk.css.map": "/doorlooplijn-visualisatie-depl/static/css/main.2f1dcbc1.chunk.css.map",
+    "static/js/2.ad7a1347.chunk.js.LICENSE.txt": "/doorlooplijn-visualisatie-depl/static/js/2.ad7a1347.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.96c6bc4b.js",
+    "static/js/2.ad7a1347.chunk.js",
+    "static/css/main.2f1dcbc1.chunk.css",
+    "static/js/main.1d415869.chunk.js"
+  ]
+}
