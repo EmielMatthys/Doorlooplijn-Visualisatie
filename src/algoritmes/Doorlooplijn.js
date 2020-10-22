@@ -11,8 +11,9 @@ import { useState, useRef } from "react"
 import { RedBlackBST } from "./BinaryTree"
 
 function distance(point1, point2) {
-  return Math.sqrt( Math.pow( point1.x - point2.x , 2 ) 
+  const res = Math.sqrt( Math.pow( point1.x - point2.x , 2 ) 
                   + Math.pow( point1.y - point2.y, 2 ));
+  return res;
 }
 
 export default function useDoorloop() {
@@ -20,7 +21,7 @@ export default function useDoorloop() {
 
   const [points, setPoints] = useState([]);
   const [closestPair, setClosestPair] = useState({
-    first: null, second: null, distance: -1
+    first: null, second: null, distance: Number.MAX_SAFE_INTEGER
   });
   const [currentIndex, setCurrentIndex] = useState(-1);
 
@@ -33,11 +34,12 @@ export default function useDoorloop() {
     const res = status.current.nnearest(point.y)
     console.log(res)
     const result = res
-                      .filter( (elem) => elem !==null && distance(point, elem) < closestPair.distance )
-                      .sort( (a, b) =>  distance(a, point) - distance(b, point));
+                    .filter( (elem) => elem !== null && distance(point, elem.value) < closestPair.distance)
+                    .sort( (a, b) =>  distance(a.value, point) - distance(b.value, point));
+    
     if (result.length > 0) {
       setClosestPair({
-        first: point, second: result[0], distance: distance(point, result[0])
+        first: point, second: result[0].value, distance: distance(point, result[0].value)
       })
     }
     
@@ -47,7 +49,7 @@ export default function useDoorloop() {
     status.current.free();
     setCurrentIndex(-1);
     setClosestPair({
-      first: null, second: null, distance: -1
+      first: null, second: null, distance: Number.MAX_SAFE_INTEGER
     });
     setPoints([]);
   }

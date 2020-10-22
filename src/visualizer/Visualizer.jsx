@@ -1,5 +1,4 @@
 import React from "react";
-import './Visualizer.css';
 import PureCanvas from "./PureCanvas";
 
 export const POINT_WIDTH = 10;
@@ -30,7 +29,8 @@ class Visualizer extends React.Component {
     this.ctx.fillStyle = '#4397AC';
     
     points.map( (point) => {
-      return this.ctx.fillRect(
+      this.ctx.fillText(String(point.y), point.x + POINT_WIDTH + 2, point.y + POINT_WIDTH)
+      this.ctx.fillRect(
         point.x,
         point.y,
         POINT_WIDTH,
@@ -48,10 +48,18 @@ class Visualizer extends React.Component {
 
     // Draw closest pair
     const {first, second, distance} = this.props.closestPair;
-    if (distance >= 0) {
+    if (first !== null) {
+      console.log("Drawing closest pair")
       this.ctx.beginPath();
       this.ctx.moveTo(first.x + POINT_WIDTH / 2, first.y + POINT_WIDTH / 2);
       this.ctx.lineTo(second.x + POINT_WIDTH / 2, second.y + POINT_WIDTH / 2);
+      this.ctx.setLineDash([10, 5]);
+      this.ctx.lineWidth = 2;
+      this.ctx.strokeStyle = "#FF0000";
+      this.ctx.stroke();
+
+      this.ctx.fillStyle = '#FF0000';
+      this.ctx.fillText("Closest pair", second.x + POINT_WIDTH / 2, second.y - POINT_WIDTH)
     }
 
     this.ctx.restore();

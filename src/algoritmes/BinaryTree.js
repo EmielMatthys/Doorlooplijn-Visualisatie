@@ -92,32 +92,37 @@ export class RedBlackBST {
   // }
 
   nnearest(key) {
-    return [this.down(key), this.up(key)];
+    // if (this.root !== null && this.root.right !== null) return [this.root.value, this.root.right.value];
+    if (this.root === null) return [null,null];
+    return [this.up(key), this.down(key)];
   }
 
   up(key) {
-    var current = this.root;
-    while (current.key !== key) {
-      if ( key < current.key ) current = current.left;
-      else current = current.right;
+    return this.upUtil(key, this.root, null);
+  }
+
+  upUtil(key, curnode, lastLeft) {
+    var res = null;
+    if (key === curnode.key) {
+      res = this.leftmost(curnode.right);
+      return res === null ? lastLeft : res;
     }
-    return this.leftmost(current.right);
+    else if (key < curnode.key) return this.upUtil(key, curnode.left, curnode);
+    else return this.upUtil(key, curnode.right, lastLeft);
   }
 
   down(key) {
-    var current = this.root;
-    while (current.key !== key) {
-      if ( key < current.key ) current = current.left;
-      else current = current.right;
-    }
-    return this.rightmost(current.left);
+    return this.downUtil(key, this.root, null);
   }
 
-  upUtil(node, key, upper, upper_dif) {
-    if (node === null) return;
-
-    if (node.key === key) return node;
-
+  downUtil(key, curnode, lastRight) {
+    var res = null;
+    if (key === curnode.key) {
+      res = this.rightmost(curnode.left);
+      return res === null ? lastRight : res;
+    }
+    else if (key > curnode.key) return this.downUtil(key, curnode.right, curnode);
+    else return this.downUtil(key, curnode.left, lastRight)
   }
 
   leftmost(node) {

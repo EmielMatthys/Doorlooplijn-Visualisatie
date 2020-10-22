@@ -14,9 +14,10 @@ function TreeVisualizer (props) {
   }
 
   const drawNode = (x, y, node, depth) => {
-    const fullDepth = Math.log2(props.tree.current.size);
+    const fullDepth = Math.ceil(Math.log2(props.tree.current.size));
     ctx.beginPath();
     ctx.arc(x, y, 25, 0, 2 * Math.PI);
+    ctx.strokeStyle =  node.color === 0? "#000000" : "#FF0000";
     ctx.stroke();
     ctx.fillText(String(node.key), x - 10, y + 5);
     if (node.left !== null) drawNode(x - (30 * (fullDepth - depth) ), y + 55, node.left, depth + 1);
