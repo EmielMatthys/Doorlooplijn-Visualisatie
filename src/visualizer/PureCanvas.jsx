@@ -20,8 +20,8 @@ export default class PureCanvas extends React.Component {
     return (
       <canvas 
         onClick={this.clickHandler}
-        width="500"
-        height="500"
+        width={this.props.width}
+        height={this.props.height}
         ref={this.setNodeRef}
       />
     );

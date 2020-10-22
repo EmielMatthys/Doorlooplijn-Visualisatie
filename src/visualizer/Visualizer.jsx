@@ -46,12 +46,20 @@ class Visualizer extends React.Component {
       this.ctx.stroke();
     }
 
+    // Draw closest pair
+    const {first, second, distance} = this.props.closestPair;
+    if (distance >= 0) {
+      this.ctx.beginPath();
+      this.ctx.moveTo(first.x + POINT_WIDTH / 2, first.y + POINT_WIDTH / 2);
+      this.ctx.lineTo(second.x + POINT_WIDTH / 2, second.y + POINT_WIDTH / 2);
+    }
+
     this.ctx.restore();
   }
 
   render() {
     return (
-      <PureCanvas onClick={this.props.onClick} contextRef={this.setContext}/>
+      <PureCanvas height="500" width="500" onClick={this.props.onClick} contextRef={this.setContext}/>
     );
   }
 }

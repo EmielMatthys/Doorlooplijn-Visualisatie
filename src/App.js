@@ -37,7 +37,8 @@ class App extends React.Component {
   nexButtonClick = (e) => {
     this.props.step();
     this.setState( (prevState) => ({
-      treeChanged: !prevState.treeChanged
+      treeChanged: !prevState.treeChanged,
+      started: true
     }))
   }
 
@@ -53,7 +54,7 @@ class App extends React.Component {
     
     return (
       <div className="App">
-        <Visualizer onClick={this.canvasClick} points={this.props.points} current={this.props.currentIndex}></Visualizer>
+        <Visualizer onClick={this.canvasClick} points={this.props.points} current={this.props.currentIndex} closestPair={this.props.closestPair}></Visualizer>
       <button onClick={this.nexButtonClick} disabled={this.props.currentIndex === this.props.points.length - 1}>Next</button>
       <button onClick={this.resetButtonClick}>RESET</button>
       <TreeVisualizer tree={this.props.status}/>
