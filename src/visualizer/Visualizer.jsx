@@ -19,7 +19,7 @@ class Visualizer extends React.Component {
     this.componentDidUpdate();
   }
 
-  componentDidUpdate() {
+  componentDidUpdate() { // TODO: viz delta
     const {points, current} = this.props;
     this.ctx.save();
     this.ctx.beginPath();
@@ -29,7 +29,7 @@ class Visualizer extends React.Component {
     this.ctx.fillStyle = '#4397AC';
     
     points.map( (point) => {
-      this.ctx.fillText(String(point.y), point.x + POINT_WIDTH + 2, point.y + POINT_WIDTH)
+      this.ctx.fillText('[' + String(point.x) + ',' + String(point.y) + ']', point.x + POINT_WIDTH + 2, point.y + POINT_WIDTH)
       this.ctx.fillRect(
         point.x,
         point.y,
@@ -38,18 +38,56 @@ class Visualizer extends React.Component {
       );
     })
 
+    const {first, second, distance} = this.props.closestPair;
+
     if (current >= 0 && current < points.length) {
       const currentPoint = points[current];
       this.ctx.beginPath();
       this.ctx.moveTo(currentPoint.x + POINT_WIDTH / 2, 0);
       this.ctx.lineTo(currentPoint.x + POINT_WIDTH / 2, this.height);
       this.ctx.stroke();
+
+      if (first !== null) {
+        //Draw delta
+        console.log("drawing delta");
+        this.ctx.strokeStyle = "#00FF00";
+
+        // Horizontal strokes
+        if (this.props.showHorStroke) {
+          this.ctx.beginPath();
+          this.ctx.moveTo(0, currentPoint.y + POINT_WIDTH/2 - distance);
+          this.ctx.lineTo(this.width, currentPoint.y + POINT_WIDTH/2 - distance);
+  
+          this.ctx.moveTo(0, currentPoint.y + POINT_WIDTH/2 + distance);
+          this.ctx.lineTo(this.width, currentPoint.y + POINT_WIDTH/2 + distance);
+          this.ctx.stroke();
+        }
+        
+
+        // Vertical strokes
+        if (this.props.showVertStroke) {
+          this.ctx.beginPath();
+          this.ctx.strokeStyle = "#00ff00";
+          this.ctx.moveTo(currentPoint.x + POINT_WIDTH/2 - distance, 0);
+          this.ctx.lineTo(currentPoint.x + POINT_WIDTH/2 - distance, this.height);
+          this.ctx.stroke();
+  
+          this.ctx.moveTo(currentPoint.x + POINT_WIDTH/2 + distance, 0);
+          this.ctx.lineTo(currentPoint.x + POINT_WIDTH/2 + distance, this.height);
+          this.ctx.stroke();
+        }
+        
+
+        // this.ctx.moveTo(10, currentPoint.y - distance);
+        // this.ctx.lineTo(10, currentPoint.y + distance);
+        // this.ctx.setLineDash([10, 5]);
+        // this.ctx.stroke();
+
+      }
     }
 
     // Draw closest pair
-    const {first, second, distance} = this.props.closestPair;
     if (first !== null) {
-      console.log("Drawing closest pair")
       this.ctx.beginPath();
       this.ctx.moveTo(first.x + POINT_WIDTH / 2, first.y + POINT_WIDTH / 2);
       this.ctx.lineTo(second.x + POINT_WIDTH / 2, second.y + POINT_WIDTH / 2);
@@ -59,7 +97,7 @@ class Visualizer extends React.Component {
       this.ctx.stroke();
 
       this.ctx.fillStyle = '#FF0000';
-      this.ctx.fillText("Closest pair", second.x + POINT_WIDTH / 2, second.y - POINT_WIDTH)
+      this.ctx.fillText("Closest pair " + String(Math.round(distance)), second.x + POINT_WIDTH / 2, second.y - POINT_WIDTH)
     }
 
     this.ctx.restore();
@@ -67,7 +105,7 @@ class Visualizer extends React.Component {
 
   render() {
     return (
-      <PureCanvas height="500" width="500" onClick={this.props.onClick} contextRef={this.setContext}/>
+      <PureCanvas height="500" width="800" onClick={this.props.onClick} contextRef={this.setContext}/>
     );
   }
 }

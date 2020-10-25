@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useEffect } from 'react';
 import PureCanvas from './PureCanvas'
 
-const HEIGHT = "500", WIDTH = "500";
+const HEIGHT = "500", WIDTH = "800";
 
 function TreeVisualizer (props) {
 

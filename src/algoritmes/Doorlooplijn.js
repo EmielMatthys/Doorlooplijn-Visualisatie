@@ -36,13 +36,13 @@ export default function useDoorloop() {
     const result = res
                     .filter( (elem) => elem !== null && distance(point, elem.value) < closestPair.distance)
                     .sort( (a, b) =>  distance(a.value, point) - distance(b.value, point));
+    console.log(result);
     
     if (result.length > 0) {
       setClosestPair({
         first: point, second: result[0].value, distance: distance(point, result[0].value)
       })
-    }
-    
+    }    
   }
 
   const reset = () => {
