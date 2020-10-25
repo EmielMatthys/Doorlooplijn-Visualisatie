@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "998f7a3b112e3afd19f585b346840d03",
+    "revision": "53b4cd97af51130c1e43ec8f81a3581b",
     "url": "/doorlooplijn-visualisatie/index.html"
   },
   {
-    "revision": "511b3828c94306269c42",
+    "revision": "3092eceffb9009700e71",
     "url": "/doorlooplijn-visualisatie/static/css/main.2f1dcbc1.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/doorlooplijn-visualisatie/static/js/2.ad7a1347.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "511b3828c94306269c42",
-    "url": "/doorlooplijn-visualisatie/static/js/main.7f6e699c.chunk.js"
+    "revision": "3092eceffb9009700e71",
+    "url": "/doorlooplijn-visualisatie/static/js/main.0c7e20ff.chunk.js"
   },
   {
     "revision": "6c2f109db55192d0df4d",
